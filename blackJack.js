@@ -155,8 +155,8 @@ window.onload = function() {
         playercard5.hidden = true
         playercard1.src = "PNG/cardBack.png"
         playercard2.src = "PNG/cardBack.png"
-        computerCard1.src = "PNG/cardback.png"
-        computerCard2.src = "PNG/cardback.png"
+        computerCard1.src = "PNG/cardBack.png"
+        computerCard2.src = "PNG/cardBack.png"
         computerCard3.hidden = true
         
         playerCardValue = 0
