@@ -1,5 +1,5 @@
 /**********************************************************
- * Author: Dan Whiteman
+ * Author: Aubrey Whiteman
  * Version: 1.0
  * Date: 04/11/2024
  * File: blackJack.js
@@ -35,6 +35,8 @@ window.onload = function() {
     // Create click listener for start game button - call startGame
     startGamebtn.addEventListener("click", startGame)
     hitButton.addEventListener("click", function(){
+        console.log(currentCardPosition + "visual")
+        console.log(otherCardPosition + "internal")
         switch (numberOfPlayerCards) {
             case 3:
                 otherCardPosition+=1
@@ -75,9 +77,7 @@ window.onload = function() {
        startGamebtn.hidden =true;
        playerHand = generatedPlayerHand
        computerHand = generatedComputerHand
-       if (playerCardValue == 11) {
-        numberOfAces+=1
-       }
+       
        playerCardValue+=playerHand[otherCardPosition].value
        otherCardPosition+=1
        if (playerCardValue == 11) {
@@ -96,7 +96,7 @@ window.onload = function() {
             playerCardValue = playerCardValue - (10 * numberOfAces)
         }
         else if (playerCardValue > 21) {
-            otherCardPosition+=2
+            
             alert("you failed")
             resetCards()
         }
@@ -109,7 +109,7 @@ window.onload = function() {
          computerCard2.src = computerHand[currentComputerCard].source
          checkComputerCardValue
          while (computerCardValue < 17) {
-            
+            computerCardValue = 17
          }
 
 
@@ -135,11 +135,17 @@ window.onload = function() {
 
     function nextHand () {
         nextButton.hidden = true
-        currentCardPosition = otherCardPosition
+        
+        playerCardValue+=playerHand[otherCardPosition].value
+        otherCardPosition+=1
+        playerCardValue+=playerHand[otherCardPosition].value
+
+
+
         playercard1.src = playerHand[currentCardPosition].source
-       currentCardPosition+=1
-       playercard2.src = playerHand[currentCardPosition].source
-       currentCardPosition+=1
+        currentCardPosition+=1
+
+        playercard2.src = playerHand[currentCardPosition].source
 
        
        
