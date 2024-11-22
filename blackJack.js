@@ -25,6 +25,7 @@ window.onload = function() {
     currentCardPosition = 0
     let playerCardValue = 0
     let numberOfPlayerCards = 3
+    let numberOfComputerCards = 3
     let playerHand
     let computerHand
     let computerCardValue = 0
@@ -104,13 +105,46 @@ window.onload = function() {
     
     function computerTurn() {
          computerCard1.src = computerHand[currentComputerCard].source
-         checkComputerCardValue
+         checkComputerCardValue()
          currentComputerCard+=1
          computerCard2.src = computerHand[currentComputerCard].source
-         checkComputerCardValue
+         checkComputerCardValue()
          while (computerCardValue < 17) {
-            computerCardValue = 17
+            switch (numberOfComputerCards) {
+                case 3:
+                    otherComputerCard+=1
+                    currentComputerCard+=1
+                    computerCard3.src = playerHand[currentCardPosition].source
+                    computerCard3.hidden = false
+                    numberOfPlayerCards+=1
+                   
+                case 4:
+                    otherComputerCard+=1
+                    currentComputerCard+=1
+                    computerCard4.src = playerHand[currentCardPosition].source
+                    computerCard4.hidden = false
+                    numberOfPlayerCards+=1
+                    setTimeout(1000)
+                    checkComputerCardValue()
+
+                
+                
+                    
+            }
+            
          }
+         if (playerCardValue > computerCardValue) {
+            alert("you win")
+            resetCards()
+        }
+        else if (computerCardValue > 21) {
+            alert("dealer is bust")
+            resetCards()
+        }
+        else {
+            alert("you failed")
+            resetCards()
+        } 
 
 
     }
@@ -121,16 +155,21 @@ window.onload = function() {
         playercard5.hidden = true
         playercard1.src = "PNG/cardBack.png"
         playercard2.src = "PNG/cardBack.png"
+        computerCard1.src = "PNG/cardback.png"
+        computerCard2.src = "PNG/cardback.png"
+        computerCard3.hidden = true
         
         playerCardValue = 0
+        computerCardValue = 0
         nextButton.hidden = false
         numberOfPlayerCards = 3
     }
 
     function checkComputerCardValue() {
-        computerCardValue+= computerHand[otherComputerCard]
+        computerCardValue+= computerHand[otherComputerCard].value
         otherComputerCard+=1
-        console.log(computerCardValue)
+        console.log(computerCardValue + "computer")
+        
     }
 
     function nextHand () {
