@@ -58,7 +58,7 @@ window.onload = function() {
             
             case 5:
                 otherCardPosition+=1
-                alert("you win you big homo :3")
+                alert("you win")
         }
     })
 
