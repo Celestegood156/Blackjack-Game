@@ -18,6 +18,7 @@ window.onload = function() {
     const hitButton = document.getElementById("btn_hit")
     const standButton = document.getElementById("btn_stand")
     const nextButton = document.getElementById("btn_next")
+    const resetButton = document.getElementById("btn_reset")
     otherCardPosition = 0
     currentComputerCard = 0
     otherComputerCard = 0
@@ -35,6 +36,7 @@ window.onload = function() {
     
     // Create click listener for start game button - call startGame
     startGamebtn.addEventListener("click", startGame)
+    resetButton.addEventListener("click", resetCards)
     hitButton.addEventListener("click", function(){
         console.log(currentCardPosition + "visual")
         console.log(otherCardPosition + "internal")
@@ -99,23 +101,35 @@ window.onload = function() {
         else if (playerCardValue > 21) {
             
             alert("you failed")
-            resetCards()
+            resetButton.hidden = false
         }
     }
     
     function computerTurn() {
          computerCard1.src = computerHand[currentComputerCard].source
          checkComputerCardValue()
+         console.log(currentComputerCard + "visual?")
+         console.log(otherComputerCard + "internal?")
          currentComputerCard+=1
+         otherComputerCard+=1
          computerCard2.src = computerHand[currentComputerCard].source
+         console.log(currentComputerCard + "visual?")
+         console.log(otherComputerCard + "internal?")
+         currentComputerCard+=1
+         otherCardPosition+=1
          checkComputerCardValue()
          while (computerCardValue < 17) {
+            
             switch (numberOfComputerCards) {
                 case 3:
                     otherComputerCard+=1
                     currentComputerCard+=1
+                    
                     computerCard3.src = playerHand[currentCardPosition].source
                     computerCard3.hidden = false
+                    setTimeout(() => {
+                        alert("Hi")
+                    }, 2000)
                     numberOfPlayerCards+=1
                    
                 case 4:
@@ -131,19 +145,20 @@ window.onload = function() {
                 
                     
             }
-            
+            console.log(currentComputerCard + "visual?")
+            console.log(otherComputerCard + "internal?")
          }
          if (playerCardValue > computerCardValue) {
             alert("you win")
-            resetCards()
+            resetButton.hidden = false
         }
         else if (computerCardValue > 21) {
             alert("dealer is bust")
-            resetCards()
+            resetButton.hidden = false
         }
         else {
             alert("you failed")
-            resetCards()
+            resetButton.hidden = false
         } 
 
 
@@ -158,6 +173,7 @@ window.onload = function() {
         computerCard1.src = "PNG/cardBack.png"
         computerCard2.src = "PNG/cardBack.png"
         computerCard3.hidden = true
+        computerCard4.hidden = true
         
         playerCardValue = 0
         computerCardValue = 0
@@ -167,7 +183,7 @@ window.onload = function() {
 
     function checkComputerCardValue() {
         computerCardValue+= computerHand[otherComputerCard].value
-        otherComputerCard+=1
+        
         console.log(computerCardValue + "computer")
         
     }
