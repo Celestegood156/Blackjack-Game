@@ -27,12 +27,13 @@ window.onload = function() {
 
     numberOfAces = 0
     currentCardPosition = 0
+    
     let playerCardValue = 0
     let numberOfPlayerCards = 3
     let numberOfComputerCards = 3
     let playerHand
     let computerHand
-    let computerCardValue = 0
+    let computerCardValue = -13
     let isPlayerTurn = true
 
     //Remember that first card position is needed to evaluate cards
@@ -115,14 +116,19 @@ window.onload = function() {
     }
     
     function computerTurn() {
+        
          computerCard1.src = computerHand[currentComputerCard].source
          checkComputerCardValue()
-         console.log(currentComputerCard + "visual?")
-         console.log(otherComputerCard + "internal?")
+         currentComputerCard+=1
+         otherComputerCard+=1
+         console.log(currentComputerCard + "visual? 1")
+         console.log(otherComputerCard + "internal? 1")
          
          computerCard2.src = computerHand[currentComputerCard].source
-         console.log(currentComputerCard + "visual?")
-         console.log(otherComputerCard + "internal?")
+         currentComputerCard+=1
+         otherComputerCard+=1
+         console.log(currentComputerCard + "visual? 2")
+         console.log(otherComputerCard + "internal? 2")
          
          checkComputerCardValue()
          while (computerCardValue < 17) {
@@ -130,26 +136,32 @@ window.onload = function() {
             switch (numberOfComputerCards) {
                 case 3:
                     
-                    
-                    computerCard3.src = playerHand[currentCardPosition].source
+                    currentComputerCard+=1
+                    otherComputerCard+=1
+                    numberOfComputerCards+=1
+                    computerCard3.src = computerHand[currentComputerCard].source
                     computerCard3.hidden = false
-                    
                     
                     checkComputerCardValue()
                     break;
                    
                 case 4:
-                    
-                    computerCard4.src = playerHand[currentCardPosition].source
+                    currentComputerCard+=1
+                    otherComputerCard+=1
+                    numberOfComputerCards+=1
+                    computerCard4.src = computerHand[currentComputerCard].source
                     computerCard4.hidden = false
                     
                     
                     checkComputerCardValue()
                     break;
                 case 5:
-                    alert("waow :3")
+                    
                     
                     resetButton.hidden = false
+                    break;
+                
+                default:
                     break;
                 
                 
@@ -200,9 +212,8 @@ window.onload = function() {
     }
     // Checks Value of Dealer Hand
     function checkComputerCardValue() {
-        computerCardValue+= computerHand[otherComputerCard].value
-        otherComputerCard+=1
-        currentComputerCard+=1
+        computerCardValue+=computerHand[otherComputerCard].value
+        
         console.log(computerCardValue + "computer")
         computerValue.innerText = "Card Value: " + computerCardValue
         
