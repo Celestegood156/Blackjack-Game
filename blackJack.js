@@ -133,36 +133,10 @@ window.onload = function() {
          checkComputerCardValue()
          while (computerCardValue < 17) {
             
-            switch (numberOfComputerCards) {
+            switch(numberOfComputerCards) {
                 case 3:
-                    
-                    currentComputerCard+=1
-                    otherComputerCard+=1
-                    numberOfComputerCards+=1
-                    computerCard3.src = computerHand[currentComputerCard].source
-                    computerCard3.hidden = false
-                    
-                    checkComputerCardValue()
-                    break;
-                   
-                case 4:
-                    currentComputerCard+=1
-                    otherComputerCard+=1
-                    numberOfComputerCards+=1
-                    computerCard4.src = computerHand[currentComputerCard].source
-                    computerCard4.hidden = false
-                    
-                    
-                    checkComputerCardValue()
-                    break;
-                case 5:
-                    
-                    
-                    resetButton.hidden = false
-                    break;
-                
-                default:
-                    break;
+
+            }
                 
                 
                     
@@ -343,4 +317,4 @@ window.onload = function() {
     }
 
     
-    }
+    
