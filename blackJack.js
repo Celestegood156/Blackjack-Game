@@ -19,6 +19,8 @@ window.onload = function() {
     const standButton = document.getElementById("btn_stand")
     const nextButton = document.getElementById("btn_next")
     const resetButton = document.getElementById("btn_reset")
+    const playerValue = document.getElementById("player-value")
+    const computerValue = document.getElementById("computer-value")
     otherCardPosition = 0
     currentComputerCard = 0
     otherComputerCard = 0
@@ -91,6 +93,7 @@ window.onload = function() {
        playerCardValue+=playerHand[otherCardPosition].value
        console.log(playerCardValue)
        console.log(numberOfAces)
+       playerValue.innerText = "Card Value: " + playerCardValue
        // doc.getElementID(card1).src = playerHand[0].source
     }
 
@@ -104,7 +107,11 @@ window.onload = function() {
             
             alert("you failed")
             resetButton.hidden = false
+            otherCardPosition+=1
+            currentCardPosition+=1
         }
+        
+        playerValue.innerText = "Card Value: " + playerCardValue
     }
     
     function computerTurn() {
@@ -136,7 +143,7 @@ window.onload = function() {
                     computerCard4.src = playerHand[currentCardPosition].source
                     computerCard4.hidden = false
                     
-                    setTimeout(1000)
+                    
                     checkComputerCardValue()
                     break;
                 case 5:
@@ -153,20 +160,26 @@ window.onload = function() {
          }
          if (playerCardValue > computerCardValue) {
             alert("you win")
+            otherCardPosition+=1
+            currentCardPosition+=1
             resetButton.hidden = false
         }
         else if (computerCardValue > 21) {
             alert("dealer is bust")
+            otherCardPosition+=1
+            currentCardPosition+=1
             resetButton.hidden = false
         }
         else {
             alert("you failed")
+            otherCardPosition+=1
+            currentCardPosition+=1
             resetButton.hidden = false
         } 
 
 
     }
-    
+    //Resets Cards
     function resetCards() {
         playercard3.hidden = true
         playercard4.hidden = true
@@ -185,15 +198,16 @@ window.onload = function() {
         resetButton.hidden = true
         
     }
-
+    // Checks Value of Dealer Hand
     function checkComputerCardValue() {
         computerCardValue+= computerHand[otherComputerCard].value
         otherComputerCard+=1
         currentComputerCard+=1
         console.log(computerCardValue + "computer")
+        computerValue.innerText = "Card Value: " + computerCardValue
         
     }
-
+    // Sets up game for next hand
     function nextHand () {
         nextButton.hidden = true
         
@@ -207,14 +221,18 @@ window.onload = function() {
         currentCardPosition+=1
 
         playercard2.src = playerHand[currentCardPosition].source
-
+        playerValue.innerText = "Card Value: " + playerCardValue
        
        
 
     }
     //Generate array of cards for player and computer
     function shuffleCards() {
-        // Array that contains every card in a pack and if that card has been selected by the shuffle algorithm + its value
+        /*
+        Array that contains every card in a pack and if that card has been selected by the shuffle algorithm + its value
+        position is used to debug sorting algorithm
+        If it's working correctly you'll never see the same position value twice
+        */
         packOfCards = [
             {selected :0, source:"PNG/2C.png", position:0 ,value:2},
             {selected :0, source:"PNG/2D.png", position:1, value:2},
