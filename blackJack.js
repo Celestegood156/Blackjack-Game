@@ -22,6 +22,7 @@ window.onload = function() {
     otherCardPosition = 0
     currentComputerCard = 0
     otherComputerCard = 0
+
     numberOfAces = 0
     currentCardPosition = 0
     let playerCardValue = 0
@@ -55,6 +56,7 @@ window.onload = function() {
                 currentCardPosition+=1
                 playercard4.src = playerHand[currentCardPosition].source
                 playercard4.hidden = false
+                numberOfPlayerCards+=1
                 checkPlayerCardValue()
                 break;
             
@@ -110,37 +112,38 @@ window.onload = function() {
          checkComputerCardValue()
          console.log(currentComputerCard + "visual?")
          console.log(otherComputerCard + "internal?")
-         currentComputerCard+=1
-         otherComputerCard+=1
+         
          computerCard2.src = computerHand[currentComputerCard].source
          console.log(currentComputerCard + "visual?")
          console.log(otherComputerCard + "internal?")
-         currentComputerCard+=1
-         otherCardPosition+=1
+         
          checkComputerCardValue()
          while (computerCardValue < 17) {
             
             switch (numberOfComputerCards) {
                 case 3:
-                    otherComputerCard+=1
-                    currentComputerCard+=1
+                    
                     
                     computerCard3.src = playerHand[currentCardPosition].source
                     computerCard3.hidden = false
-                    setTimeout(() => {
-                        alert("Hi")
-                    }, 2000)
-                    numberOfPlayerCards+=1
+                    
+                    
+                    checkComputerCardValue()
+                    break;
                    
                 case 4:
-                    otherComputerCard+=1
-                    currentComputerCard+=1
+                    
                     computerCard4.src = playerHand[currentCardPosition].source
                     computerCard4.hidden = false
-                    numberOfPlayerCards+=1
+                    
                     setTimeout(1000)
                     checkComputerCardValue()
-
+                    break;
+                case 5:
+                    alert("waow :3")
+                    
+                    resetButton.hidden = false
+                    break;
                 
                 
                     
@@ -179,11 +182,14 @@ window.onload = function() {
         computerCardValue = 0
         nextButton.hidden = false
         numberOfPlayerCards = 3
+        resetButton.hidden = true
+        
     }
 
     function checkComputerCardValue() {
         computerCardValue+= computerHand[otherComputerCard].value
-        
+        otherComputerCard+=1
+        currentComputerCard+=1
         console.log(computerCardValue + "computer")
         
     }
