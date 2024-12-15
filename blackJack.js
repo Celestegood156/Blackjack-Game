@@ -116,35 +116,41 @@ window.onload = function() {
     
     function computerTurn() {
          computerCard1.src = computerHand[currentComputerCard].source
+         
          checkComputerCardValue()
+         currentComputerCard+=1
          console.log(currentComputerCard + "visual?")
          console.log(otherComputerCard + "internal?")
          
          computerCard2.src = computerHand[currentComputerCard].source
+         checkComputerCardValue()
          console.log(currentComputerCard + "visual?")
          console.log(otherComputerCard + "internal?")
          
-         checkComputerCardValue()
+         
+         currentComputerCard+=1
          while (computerCardValue < 17) {
             
             switch (numberOfComputerCards) {
                 case 3:
                     
                     
-                    computerCard3.src = playerHand[currentCardPosition].source
-                    computerCard3.hidden = false
-                    
-                    
+                    computerCard3.src = computerHand[currentComputerCard].source
                     checkComputerCardValue()
+                    computerCard3.hidden = false
+                    currentComputerCard+=1
+                    
+                    
                     break;
                    
                 case 4:
                     
-                    computerCard4.src = playerHand[currentCardPosition].source
-                    computerCard4.hidden = false
-                    
-                    
+                    computerCard4.src = computerHand[currentComputerCard].source
                     checkComputerCardValue()
+                    computerCard4.hidden = false
+                    currentComputerCard+=1
+                    
+                    
                     break;
                 case 5:
                     alert("waow :3")
@@ -200,9 +206,9 @@ window.onload = function() {
     }
     // Checks Value of Dealer Hand
     function checkComputerCardValue() {
-        computerCardValue+= computerHand[otherComputerCard].value
-        otherComputerCard+=1
-        currentComputerCard+=1
+        computerCardValue+= computerHand[currentComputerCard].value
+        
+        
         console.log(computerCardValue + "computer")
         computerValue.innerText = "Card Value: " + computerCardValue
         
