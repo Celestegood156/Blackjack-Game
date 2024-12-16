@@ -23,8 +23,6 @@ window.onload = function() {
     const computerValue = document.getElementById("computer-value")
     otherCardPosition = 0
     currentComputerCard = 0
-    otherComputerCard = 0
-
     numberOfAces = 0
     currentCardPosition = 0
     let playerCardValue = 0
@@ -33,7 +31,9 @@ window.onload = function() {
     let playerHand
     let computerHand
     let computerCardValue = 0
-    let isPlayerTurn = true
+    let playerResetValue = 0
+    let computerResetValue = 0
+    
 
     //Remember that first card position is needed to evaluate cards
     
@@ -120,12 +120,12 @@ window.onload = function() {
          checkComputerCardValue()
          currentComputerCard+=1
          console.log(currentComputerCard + "visual?")
-         console.log(otherComputerCard + "internal?")
+         
          
          computerCard2.src = computerHand[currentComputerCard].source
          checkComputerCardValue()
          console.log(currentComputerCard + "visual?")
-         console.log(otherComputerCard + "internal?")
+         
          
          
          currentComputerCard+=1
@@ -162,7 +162,7 @@ window.onload = function() {
                     
             }
             console.log(currentComputerCard + "visual?")
-            console.log(otherComputerCard + "internal?")
+            
          }
          if (playerCardValue > computerCardValue) {
             alert("you win")
@@ -203,6 +203,11 @@ window.onload = function() {
         numberOfPlayerCards = 3
         resetButton.hidden = true
         
+        playerResetValue = 26 - currentCardPosition
+        computerResetValue = 26 - currentComputerCard
+        if (playerResetValue < 5 || computerResetValue < 5) {
+            alert("hiii")
+        }
     }
     // Checks Value of Dealer Hand
     function checkComputerCardValue() {
@@ -276,10 +281,10 @@ window.onload = function() {
             {selected :0, source:"PNG/10D.png", position:33, value:10},
             {selected :0, source:"PNG/10H.png", position:34, value:10},
             {selected :0, source:"PNG/10S.png", position:35, value:10},
-            {selected :0, source:"PNG/AC.png", position:36, value:11},
-            {selected :0, source:"PNG/AD.png", position:37, value:11},
-            {selected :0, source:"PNG/AH.png", position:38, value:11},
-            {selected :0, source:"PNG/AS.png", position:39, value:11},
+            {selected :0, source:"PNG/AC.png", position:36, value:1},
+            {selected :0, source:"PNG/AD.png", position:37, value:1},
+            {selected :0, source:"PNG/AH.png", position:38, value:1},
+            {selected :0, source:"PNG/AS.png", position:39, value:1},
             {selected :0, source:"PNG/JC.png", position:40, value:10},
             {selected :0, source:"PNG/JD.png", position:41, value:10},
             {selected :0, source:"PNG/JH.png", position:42, value:10},
