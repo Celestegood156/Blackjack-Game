@@ -21,6 +21,7 @@ window.onload = function() {
     const resetButton = document.getElementById("btn_reset")
     const playerValue = document.getElementById("player-value")
     const computerValue = document.getElementById("computer-value")
+    const newHandButton = document.getElementById("btn_new_hand")
     otherCardPosition = 0
     currentComputerCard = 0
     numberOfAces = 0
@@ -33,6 +34,7 @@ window.onload = function() {
     let computerCardValue = 0
     let playerResetValue = 0
     let computerResetValue = 0
+    showButtons = false
     
 
     //Remember that first card position is needed to evaluate cards
@@ -74,7 +76,10 @@ window.onload = function() {
     
     function startGame() {
        let [generatedPlayerHand, generatedComputerHand] = shuffleCards()
-       
+       if (showButtons = true) {
+        hitButton.hidden = false
+        standButton.hidden = false
+       }
        console.log(generatedPlayerHand)
        console.log(generatedComputerHand)
        console.log(generatedPlayerHand[0].source)
@@ -84,12 +89,9 @@ window.onload = function() {
        startGamebtn.hidden =true;
        playerHand = generatedPlayerHand
        computerHand = generatedComputerHand
-       
+       newHandButton.hidden = true
        playerCardValue+=playerHand[otherCardPosition].value
        otherCardPosition+=1
-       if (playerCardValue == 11) {
-        numberOfAces+=1
-       }
        playerCardValue+=playerHand[otherCardPosition].value
        console.log(playerCardValue)
        console.log(numberOfAces)
@@ -168,6 +170,8 @@ window.onload = function() {
             alert("you win")
             otherCardPosition+=1
             currentCardPosition+=1
+            hitButton.hidden = true
+            standButton.hidden = true
             resetButton.hidden = false
         }
         else if (computerCardValue > 21) {
@@ -175,12 +179,16 @@ window.onload = function() {
             otherCardPosition+=1
             currentCardPosition+=1
             resetButton.hidden = false
+            hitButton.hidden = true
+            standButton.hidden = true
         }
         else {
             alert("you failed")
             otherCardPosition+=1
             currentCardPosition+=1
             resetButton.hidden = false
+            hitButton.hidden = true
+            standButton.hidden = true
         } 
 
 
@@ -196,7 +204,6 @@ window.onload = function() {
         computerCard2.src = "PNG/cardBack.png"
         computerCard3.hidden = true
         computerCard4.hidden = true
-        
         playerCardValue = 0
         computerCardValue = 0
         nextButton.hidden = false
@@ -206,9 +213,23 @@ window.onload = function() {
         playerResetValue = 26 - currentCardPosition
         computerResetValue = 26 - currentComputerCard
         if (playerResetValue < 5 || computerResetValue < 5) {
-            alert("hiii")
+            newHandButton.hidden = false
+            nextButton.hidden = true
+            otherCardPosition = 0
+            currentComputerCard = 0
+            numberOfAces = 0
+            currentCardPosition = 0
+            playerCardValue = 0
+            numberOfPlayerCards = 3
+            numberOfComputerCards = 3
+            playerHand = 0
+            computerHand = 0
+            computerCardValue = 0
+            playerResetValue = 0
+            computerResetValue = 0
         }
     }
+    newHandButton.addEventListener("click",startGame)
     // Checks Value of Dealer Hand
     function checkComputerCardValue() {
         computerCardValue+= computerHand[currentComputerCard].value
@@ -221,7 +242,8 @@ window.onload = function() {
     // Sets up game for next hand
     function nextHand () {
         nextButton.hidden = true
-        
+        hitButton.hidden = false
+        standButton.hidden = false
         playerCardValue+=playerHand[otherCardPosition].value
         otherCardPosition+=1
         playerCardValue+=playerHand[otherCardPosition].value
