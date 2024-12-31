@@ -42,6 +42,8 @@ window.onload = function() {
     // Create click listener for start game button - call startGame
     startGamebtn.addEventListener("click", startGame)
     resetButton.addEventListener("click", resetCards)
+
+    //Hit in Blackjack 
     hitButton.addEventListener("click", function(){
         console.log(currentCardPosition + "visual")
         console.log(otherCardPosition + "internal")
@@ -66,7 +68,19 @@ window.onload = function() {
             
             case 5:
                 otherCardPosition+=1
-                alert("you win")
+                currentCardPosition+=1
+                playercard5.src = playerHand[currentCardPosition].source
+                playercard5.hidden = false
+                checkPlayerCardValue()
+                if (playerCardValue < 21) {
+                    alert("you win")
+                    otherCardPosition+=1
+                    currentCardPosition+=1
+                    hitButton.hidden = true
+                    standButton.hidden = true
+                    resetButton.hidden = false
+                }
+                break;
         }
     })
 
@@ -80,6 +94,8 @@ window.onload = function() {
         hitButton.hidden = false
         standButton.hidden = false
        }
+       hitButton.hidden = false
+       standButton.hidden = false
        console.log(generatedPlayerHand)
        console.log(generatedComputerHand)
        console.log(generatedPlayerHand[0].source)
@@ -111,6 +127,8 @@ window.onload = function() {
             resetButton.hidden = false
             otherCardPosition+=1
             currentCardPosition+=1
+            hitButton.hidden = true
+            standButton.hidden = true
         }
         
         playerValue.innerText = "Card Value: " + playerCardValue
