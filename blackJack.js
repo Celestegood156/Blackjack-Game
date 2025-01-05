@@ -34,6 +34,8 @@ window.onload = function() {
     let computerCardValue = 0
     let playerResetValue = 0
     let computerResetValue = 0
+    let hasWon = false
+    let hasComputerWon = false
     showButtons = false
     
 
@@ -76,11 +78,14 @@ window.onload = function() {
                     alert("you win")
                     otherCardPosition+=1
                     currentCardPosition+=1
+                    hasWon = true
                     hitButton.hidden = true
                     standButton.hidden = true
                     resetButton.hidden = false
+                    break;
                 }
-                break;
+                
+                
         }
     })
 
@@ -114,14 +119,13 @@ window.onload = function() {
        playerValue.innerText = "Card Value: " + playerCardValue
        // doc.getElementID(card1).src = playerHand[0].source
     }
-
+    // Checks value of player cards
     function checkPlayerCardValue () {
         playerCardValue+=playerHand[otherCardPosition].value
         console.log(playerCardValue)
-        if (playerCardValue > 21 && numberOfAces > 1000000000) {
-            playerCardValue = playerCardValue - (10 * numberOfAces)
-        }
-        else if (playerCardValue > 21) {
+        otherCardPosition+=1
+        currentCardPosition+=1
+        if (playerCardValue > 21) {
             
             alert("you failed")
             resetButton.hidden = false
@@ -131,9 +135,11 @@ window.onload = function() {
             standButton.hidden = true
         }
         
+        
+        
         playerValue.innerText = "Card Value: " + playerCardValue
     }
-    
+    // Handles computer turn
     function computerTurn() {
          computerCard1.src = computerHand[currentComputerCard].source
          
@@ -173,18 +179,30 @@ window.onload = function() {
                     
                     break;
                 case 5:
-                    alert("waow :3")
+                    computerCard5.src = computerHand[currentComputerCard].source
+                    checkComputerCardValue()
+                    computerCard5.hidden = false
+                    currentComputerCard+=1
+                    if (computerCardValue < 21) {
+                        hitButton.hidden = true
+                        standButton.hidden = true
+                        hasComputerWon = true
+                        alert("You failed")
+                        otherCardPosition+=1
+                        currentCardPosition+=1
+                        resetButton.hidden = false
+                        
+                    }
                     
-                    resetButton.hidden = false
-                    break;
+                    
                 
                 
                     
             }
             console.log(currentComputerCard + "visual?")
             
-         }
-         if (playerCardValue > computerCardValue) {
+        }
+        if (playerCardValue > computerCardValue && hasWon == false) {
             alert("you win")
             otherCardPosition+=1
             currentCardPosition+=1
@@ -192,7 +210,7 @@ window.onload = function() {
             standButton.hidden = true
             resetButton.hidden = false
         }
-        else if (computerCardValue > 21) {
+        else if (computerCardValue > 21 && hasWon == false) {
             alert("dealer is bust")
             otherCardPosition+=1
             currentCardPosition+=1
@@ -200,7 +218,7 @@ window.onload = function() {
             hitButton.hidden = true
             standButton.hidden = true
         }
-        else {
+        else if (hasComputerWon == false) {
             alert("you failed")
             otherCardPosition+=1
             currentCardPosition+=1
@@ -222,11 +240,32 @@ window.onload = function() {
         computerCard2.src = "PNG/cardBack.png"
         computerCard3.hidden = true
         computerCard4.hidden = true
+        computerCard5.hidden = true
         playerCardValue = 0
         computerCardValue = 0
         nextButton.hidden = false
         numberOfPlayerCards = 3
         resetButton.hidden = true
+        let playerResetValue = 0
+        let computerResetValue = 0
+        hasWon = false
+        hasComputerWon = false
+
+        /*  otherCardPosition = 0
+    currentComputerCard = 0
+    numberOfAces = 0
+    currentCardPosition = 0
+    let playerCardValue = 0
+    let numberOfPlayerCards = 3
+    let numberOfComputerCards = 3
+    let playerHand
+    let computerHand
+    let computerCardValue = 0
+    let playerResetValue = 0
+    let computerResetValue = 0
+    let hasWon = false
+    let hasComputerWon = false
+    showButtons = false */
         
         playerResetValue = 26 - currentCardPosition
         computerResetValue = 26 - currentComputerCard
@@ -235,7 +274,6 @@ window.onload = function() {
             nextButton.hidden = true
             otherCardPosition = 0
             currentComputerCard = 0
-            numberOfAces = 0
             currentCardPosition = 0
             playerCardValue = 0
             numberOfPlayerCards = 3
