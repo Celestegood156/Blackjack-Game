@@ -24,7 +24,6 @@ window.onload = function() {
     const newHandButton = document.getElementById("btn_new_hand")
     otherCardPosition = 0
     currentComputerCard = 0
-    numberOfAces = 0
     currentCardPosition = 0
     let playerCardValue = 0
     let numberOfPlayerCards = 3
@@ -36,7 +35,6 @@ window.onload = function() {
     let computerResetValue = 0
     let hasWon = false
     let hasComputerWon = false
-    showButtons = false
     
 
     //Remember that first card position is needed to evaluate cards
@@ -47,8 +45,7 @@ window.onload = function() {
 
     //Hit in Blackjack 
     hitButton.addEventListener("click", function(){
-        console.log(currentCardPosition + "visual")
-        console.log(otherCardPosition + "internal")
+        
         switch (numberOfPlayerCards) {
             case 3:
                 otherCardPosition+=1
@@ -93,17 +90,11 @@ window.onload = function() {
 
     nextButton.addEventListener("click", nextHand)
     
+    // Sets up game for play
     function startGame() {
        let [generatedPlayerHand, generatedComputerHand] = shuffleCards()
-       if (showButtons = true) {
-        hitButton.hidden = false
-        standButton.hidden = false
-       }
        hitButton.hidden = false
        standButton.hidden = false
-       console.log(generatedPlayerHand)
-       console.log(generatedComputerHand)
-       console.log(generatedPlayerHand[0].source)
        playercard1.src = generatedPlayerHand[currentCardPosition].source
        currentCardPosition+=1
        playercard2.src = generatedPlayerHand[currentCardPosition].source
@@ -114,15 +105,12 @@ window.onload = function() {
        playerCardValue+=playerHand[otherCardPosition].value
        otherCardPosition+=1
        playerCardValue+=playerHand[otherCardPosition].value
-       console.log(playerCardValue)
-       console.log(numberOfAces)
        playerValue.innerText = "Card Value: " + playerCardValue
        // doc.getElementID(card1).src = playerHand[0].source
     }
     // Checks value of player cards
     function checkPlayerCardValue () {
         playerCardValue+=playerHand[otherCardPosition].value
-        console.log(playerCardValue)
         otherCardPosition+=1
         currentCardPosition+=1
         if (playerCardValue > 21) {
@@ -145,12 +133,10 @@ window.onload = function() {
          
          checkComputerCardValue()
          currentComputerCard+=1
-         console.log(currentComputerCard + "visual?")
          
          
          computerCard2.src = computerHand[currentComputerCard].source
          checkComputerCardValue()
-         console.log(currentComputerCard + "visual?")
          
          
          
@@ -201,7 +187,6 @@ window.onload = function() {
                 
                     
             }
-            console.log(currentComputerCard + "visual?")
             
         }
         if (playerCardValue > computerCardValue && hasWon == false) {
@@ -228,7 +213,15 @@ window.onload = function() {
             hitButton.hidden = true
             standButton.hidden = true
         } 
-        
+        else {
+            alert("Draw")
+            otherCardPosition+=1
+            currentCardPosition+=1
+            resetButton.hidden = false
+            hitButton.hidden = true
+            standButton.hidden = true
+            
+        }
 
 
     }
@@ -249,8 +242,8 @@ window.onload = function() {
         nextButton.hidden = false
         numberOfPlayerCards = 3
         resetButton.hidden = true
-        let playerResetValue = 0
-        let computerResetValue = 0
+        playerResetValue = 0
+        computerResetValue = 0
         hasWon = false
         hasComputerWon = false
 
@@ -294,7 +287,6 @@ window.onload = function() {
         computerCardValue+= computerHand[currentComputerCard].value
         
         
-        console.log(computerCardValue + "computer")
         computerValue.innerText = "Card Value: " + computerCardValue
         
     }
@@ -395,11 +387,9 @@ window.onload = function() {
            
            
            packOfCards[cardSelect].selected = 1
-           console.log(packOfCards[cardSelect].selected)
            playerCards.push(packOfCards[cardSelect])
            
         }
-        console.log("Player hand generated")
         
         
         //Generates Computer hand
@@ -415,11 +405,9 @@ window.onload = function() {
             
             
              packOfCards[cardSelect].selected = 1
-            console.log(packOfCards[cardSelect].selected)
             computerCards.push(packOfCards[cardSelect])
            
         }
-        console.log("Computer hand generated")
         return [playerCards, computerCards]
     }
 
