@@ -74,7 +74,7 @@ window.onload = function() {
                 playercard5.src = playerHand[currentCardPosition].source
                 playercard5.hidden = false
                 checkPlayerCardValue()
-                if (playerCardValue < 21) {
+                if (playerCardValue <= 21) {
                     alert("you win")
                     otherCardPosition+=1
                     currentCardPosition+=1
@@ -183,16 +183,18 @@ window.onload = function() {
                     checkComputerCardValue()
                     computerCard5.hidden = false
                     currentComputerCard+=1
-                    if (computerCardValue < 21) {
+                    if (computerCardValue <= 21) {
                         hitButton.hidden = true
                         standButton.hidden = true
                         hasComputerWon = true
-                        alert("You failed")
+                        alert("You failed :3")
                         otherCardPosition+=1
                         currentCardPosition+=1
                         resetButton.hidden = false
-                        
+                        break;
                     }
+                    break;
+                    
                     
                     
                 
@@ -203,7 +205,7 @@ window.onload = function() {
             
         }
         if (playerCardValue > computerCardValue && hasWon == false) {
-            alert("you win")
+            alert("You win")
             otherCardPosition+=1
             currentCardPosition+=1
             hitButton.hidden = true
@@ -211,21 +213,28 @@ window.onload = function() {
             resetButton.hidden = false
         }
         else if (computerCardValue > 21 && hasWon == false) {
-            alert("dealer is bust")
+            alert("Dealer is bust")
             otherCardPosition+=1
             currentCardPosition+=1
             resetButton.hidden = false
             hitButton.hidden = true
             standButton.hidden = true
         }
-        else if (hasComputerWon == false) {
-            alert("you failed")
+        else if (hasComputerWon == false && playerCardValue < computerCardValue) {
+            alert("You failed")
             otherCardPosition+=1
             currentCardPosition+=1
             resetButton.hidden = false
             hitButton.hidden = true
             standButton.hidden = true
         } 
+        else {
+            alert("Draw")
+            otherCardPosition+=1
+            currentCardPosition+=1
+            resetButton.hidden = false
+            hitButton.hidden = true
+        }
 
 
     }
