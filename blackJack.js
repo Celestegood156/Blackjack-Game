@@ -228,13 +228,7 @@ window.onload = function() {
             hitButton.hidden = true
             standButton.hidden = true
         } 
-        else {
-            alert("Draw")
-            otherCardPosition+=1
-            currentCardPosition+=1
-            resetButton.hidden = false
-            hitButton.hidden = true
-        }
+        
 
 
     }
